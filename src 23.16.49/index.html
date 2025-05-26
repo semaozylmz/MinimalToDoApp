@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minimal To-Do</title>
+  <script type="module" src="app.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+
+</head>
+<body class="min-h-screen bg-gradient-to-br from-rose-100 via-purple-100 to-rose-200 flex flex-col items-center justify-center p-4 text-rose-500 font-[Poppins]">
+
+  <div class="w-full max-w-md">
+    <h1 class="text-4xl font-serif font-light mb-6 text-center text-rose-400 tracking-wide">
+        ✿ minimal tasks
+    </h1>
+
+
+    <div class="border border-rose-100 shadow-2xl rounded-2xl p-6 bg-gradient-to-br from-rose-50 to-pink-100 mb-6 ring-1 ring-rose-300">
+
+      <!-- Task Input -->
+      <div class="flex mb-4">
+        <input id="taskInput" type="text" placeholder="What needs to be done?" 
+               class="flex-1 border-b border-rose-200 px-2 py-3 focus:outline-none focus:border-rose-400 transition-all bg-transparent">
+        <button id="addTaskBtn" class="ml-2 w-10 h-10 flex items-center justify-center bg-rose-400 text-white rounded-full hover:bg-rose-700 transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      </div>
+      
+      <!-- Extra Fields (Hidden by default) -->
+      <div id="extraFields" class="hidden space-y-3 animate__animated animate__fadeIn">
+        <textarea id="descriptionInput" rows="2" placeholder="Description (optional)" class="w-full border-b border-rose-200 px-2 py-2 focus:outline-none focus:border-rose-400 text-sm resize-none transition-all bg-transparent"></textarea>
+        <div class="flex items-center space-x-2">
+          <input id="deadlineInput" type="date" class="w-full border-b border-rose-200 px-2 py-2 focus:outline-none focus:border-rose-400 text-sm bg-rose-50">
+          <div class="flex items-center gap-2 w-full">
+            <select id="categoryInput" class="flex-1 p-2 border border-rose-200 rounded-md bg-rose-50 text-rose-700">
+                <!-- Kategoriler -->
+            </select>
+            <button id="addCategoryBtn" class="text-rose-300 hover:text-rose-500">
+            <!-- Heroicon: Plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
+                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button id="toggleExtraBtn" class="text-xs text-rose-400 hover:text-rose-600 mt-2 transition-all">
+      <span id="toggleExtraText">+ Add details</span>
+      </button>
+    </div>
+    
+    <!-- Category Filters -->
+    <div id="filterBtns" class="flex flex-wrap gap-2 mb-4 justify-center"></div>
+    
+    <!-- Task List -->
+    <ul id="taskList" class="space-y-2">
+
+    </ul>
+
+    
+    <!-- Sorting Options -->
+    <div class="mt-4 text-center">
+      <select id="sortSelect" class="text-xs border border-rose-200 rounded px-2 py-1 focus:outline-none bg-rose-50 text-rose-700">
+        <option value="added-desc">Newest first</option>
+        <option value="added-asc">Oldest first</option>
+        <option value="date-asc">Due date (earliest)</option>
+        <option value="date-desc">Due date (latest)</option>
+      </select>
+    </div>
+
+    <!-- Add Category Modal (Hidden) -->
+    <div id="categoryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
+      <div class="bg-rose-100 rounded-lg p-6 max-w-sm w-full animate__animated animate__fadeIn">
+        <h3 class="text-lg font-medium mb-4 text-rose-700">Add New Category</h3>
+        <input id="newCategoryInput" type="text" placeholder="Category name" class="w-full border-b border-rose-200 px-2 py-2 focus:outline-none focus:border-rose-400 mb-4 bg-transparent">
+        <div class="flex justify-end space-x-2">
+          <button id="cancelCategoryBtn" class="px-4 py-2 text-rose-500 hover:text-rose-700">Cancel</button>
+          <button id="saveCategoryBtn" class="px-4 py-2 bg-rose-700 text-white rounded hover:bg-rose-600">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
