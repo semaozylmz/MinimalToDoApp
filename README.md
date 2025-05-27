@@ -58,3 +58,11 @@ Kategoriler arasında geçiş yapabilir, filtreleyebilirsiniz.
 Görev üzerine tıklayarak tamamlandı olarak işaretleyebilirsiniz.
 Kategorileri yönetmek için + ikonuna basıp yeni kategori ekleyebilir, mevcut kategorileri silebilirsiniz.
 Görevleri farklı kriterlere göre sıralayabilirsiniz.
+
+# Build Etmek İçin
+
+Projeyi build etmek için aşağıdaki komutu çalıştırın:
+
+npm run build
+
+Bu işlem dist klasöründe derlenmiş dosyaları oluşturur. Oluşan dosyalar sayesinde uygulamayı bağımsız olarak kullanabilirsiniz.
