@@ -40,6 +40,7 @@
 1. Projeyi klonlayın veya indirin:
 
 git clone https://github.com/semaozylmz/MinimalToDoApp
+
 cd MinimalToDoApp
 
 2. Gerekli bağımlılıkları yükleyin:
