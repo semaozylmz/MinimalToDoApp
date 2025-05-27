@@ -106,8 +106,6 @@ const elements = {
       defaultOption.selected = true;        // varsayılan seçili
       elements.categoryInput.appendChild(defaultOption);
 
-
-      // "All" button
       const allBtn = document.createElement("button");
       allBtn.textContent = "All";
       allBtn.className = "text-xs px-3 py-1 rounded-full bg-gray-200 hover:bg-gray-300 transition-all";
@@ -276,7 +274,6 @@ const elements = {
   elements.toggleExtraBtn.addEventListener("click", render.toggleExtraFields);
   elements.sortSelect.addEventListener("change", () => render.tasks());
 
-  // Category Management
   elements.addCategoryBtn.addEventListener("click", () => {
     render.toggleCategoryModal(true);
   });
@@ -310,6 +307,33 @@ const elements = {
     if (e.key === "Enter") elements.saveCategoryBtn.click();
   });
 
-  // Initial Render
   render.categories();
   render.tasks();
+
+const darkModeToggle = document.getElementById("darkModeToggle");
+const darkIcon = document.getElementById("darkIcon");
+const lightIcon = document.getElementById("lightIcon");
+
+darkModeToggle.addEventListener("click", () => {
+  document.documentElement.classList.toggle("dark");
+  const isDark = document.documentElement.classList.contains("dark");
+  localStorage.setItem("darkMode", isDark);
+  
+  if (isDark) {
+    darkIcon.classList.remove("hidden");
+    lightIcon.classList.add("hidden");
+  } else {
+    darkIcon.classList.add("hidden");
+    lightIcon.classList.remove("hidden");
+  }
+});
+
+if (localStorage.getItem("darkMode") === "true") {
+  document.documentElement.classList.add("dark");
+  darkIcon.classList.remove("hidden");
+  lightIcon.classList.add("hidden");
+} else {
+  document.documentElement.classList.remove("dark");
+  darkIcon.classList.add("hidden");
+  lightIcon.classList.remove("hidden");
+}

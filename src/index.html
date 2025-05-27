@@ -3,73 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <title>Minimal To-Do</title>
-  <script type="module" src="app.js"></script>
+  <script defer src="app.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            dark: {
+              100: '#000000',  
+              200: '#0a0a0a',
+              300: '#111111',
+              400: '#1a1a1a',
+              500: '#222222',
+              600: '#2a2a2a',
+            },
+            metal: {
+              100: '#ffffff', 
+              200: '#f8f8f8',
+              300: '#f0f0f0',
+              400: '#e8e8e8',
+              500: '#e0e0e0',
+              600: '#d8d8d8',
+            }
+          }
+        }
+      }
+    }
+  </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
-
   <link rel="icon" type="image/png" href="/assets/favicon.png">
-
 </head>
-<body class="min-h-screen bg-gradient-to-br from-rose-100 via-purple-100 to-rose-200 flex flex-col items-center justify-center p-4 text-rose-500 font-[Poppins]">
-
+<body class="min-h-screen bg-gradient-to-br from-rose-100 via-purple-100 to-rose-200 dark:bg-gradient-to-br dark:from-dark-100 dark:via-dark-300 dark:to-dark-500 flex flex-col items-center justify-center p-4 text-rose-500 dark:text-metal-100 font-[Poppins] transition-colors duration-300">
   <div class="w-full max-w-md">
-    <h1 class="text-4xl font-serif font-light mb-6 text-center text-rose-400 tracking-wide">
+    <div class="flex justify-between items-center mb-2">
+      <h1 class="text-4xl font-serif font-light text-center text-rose-400 dark:text-metal-100 tracking-wide">
         ✿ minimal tasks
-    </h1>
+      </h1>
+      <button id="darkModeToggle" class="p-2 rounded-full bg-rose-100 dark:bg-dark-400 text-rose-500 dark:text-metal-100 hover:bg-rose-200 dark:hover:bg-dark-500 transition-all">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path id="darkIcon" d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" class="hidden"/>
+          <path id="lightIcon" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" class="block"/>
+        </svg>
+      </button>
+    </div>
 
-
-    <div class="border border-rose-100 shadow-2xl rounded-2xl p-6 bg-gradient-to-br from-rose-50 to-pink-100 mb-6 ring-1 ring-rose-300">
-
+    <div class="border border-rose-100 dark:border-dark-400 shadow-2xl rounded-2xl p-6 bg-gradient-to-br from-rose-50 to-pink-100 dark:from-dark-300 dark:to-dark-400 mb-6 ring-1 ring-rose-300 dark:ring-dark-500 transition-colors duration-300">
       <!-- Task Input -->
       <div class="flex mb-4">
         <input id="taskInput" type="text" placeholder="What needs to be done?" 
-               class="flex-1 border-b border-rose-200 px-2 py-3 focus:outline-none focus:border-rose-400 transition-all bg-transparent">
-        <button id="addTaskBtn" class="ml-2 w-10 h-10 flex items-center justify-center bg-rose-400 text-white rounded-full hover:bg-rose-700 transition-all">
+               class="flex-1 border-b border-rose-200 dark:border-metal-300 px-2 py-3 focus:outline-none focus:border-rose-400 dark:focus:border-metal-100 transition-all bg-transparent dark:placeholder-metal-300 dark:text-metal-100">
+        <button id="addTaskBtn" class="ml-2 w-10 h-10 flex items-center justify-center bg-rose-400 dark:bg-metal-100 dark:text-dark-400 text-white rounded-full hover:bg-rose-700 dark:hover:bg-metal-200 transition-all">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
           </svg>
         </button>
       </div>
       
-      <!-- Extra Fields (Hidden by default) -->
+      <!-- Extra Fields -->
       <div id="extraFields" class="hidden space-y-3 animate__animated animate__fadeIn">
-        <textarea id="descriptionInput" rows="2" placeholder="Description (optional)" class="w-full border-b border-rose-200 px-2 py-2 focus:outline-none focus:border-rose-400 text-sm resize-none transition-all bg-transparent"></textarea>
+        <textarea id="descriptionInput" rows="2" placeholder="Description (optional)" class="w-full border-b border-rose-200 dark:border-metal-300 px-2 py-2 focus:outline-none focus:border-rose-400 dark:focus:border-metal-100 text-sm resize-none transition-all bg-transparent dark:placeholder-metal-300 dark:text-metal-100"></textarea>
         <div class="flex items-center space-x-2">
-          <input id="deadlineInput" type="date" class="w-full border-b border-rose-200 px-2 py-2 focus:outline-none focus:border-rose-400 text-sm bg-rose-50">
+          <input id="deadlineInput" type="date" class="w-full border-b border-rose-200 dark:border-metal-300 px-2 py-2 focus:outline-none focus:border-rose-400 dark:focus:border-metal-100 text-sm bg-rose-50 dark:bg-dark-400 dark:text-metal-100">
           <div class="flex items-center gap-2 w-full">
-            <select id="categoryInput" class="flex-1 p-2 border border-rose-200 rounded-md bg-rose-50 text-rose-700">
+            <select id="categoryInput" class="flex-1 p-2 border border-rose-200 dark:border-metal-300 rounded-md bg-rose-50 dark:bg-dark-400 text-rose-700 dark:text-metal-100">
                 <!-- Kategoriler -->
             </select>
-            <button id="addCategoryBtn" class="text-rose-300 hover:text-rose-500">
-            <!-- Heroicon: Plus -->
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none"
-                 viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-            </svg>
-          </button>
+            <button id="addCategoryBtn" class="text-rose-300 dark:text-metal-300 hover:text-rose-500 dark:hover:text-metal-100">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
 
-    <button id="toggleExtraBtn" class="text-xs text-rose-400 hover:text-rose-600 mt-2 transition-all">
+    <button id="toggleExtraBtn" class="text-xs text-rose-400 dark:text-metal-300 hover:text-rose-600 dark:hover:text-metal-100 mt-2 transition-all">
       <span id="toggleExtraText">+ Add details</span>
-      </button>
-    </div>
+    </button>
     
     <!-- Category Filters -->
     <div id="filterBtns" class="flex flex-wrap gap-2 mb-4 justify-center"></div>
     
     <!-- Task List -->
-    <ul id="taskList" class="space-y-2">
-
-    </ul>
-
+    <ul id="taskList" class="space-y-2"></ul>
     
     <!-- Sorting Options -->
-    <div class="mt-4 text-center">
-      <select id="sortSelect" class="text-xs border border-rose-200 rounded px-2 py-1 focus:outline-none bg-rose-50 text-rose-700">
+    <div class="flex justify-center items-center mt-4">
+      <select id="sortSelect" class="text-xs border border-rose-200 dark:border-metal-300 rounded px-2 py-1 focus:outline-none bg-rose-50 dark:bg-dark-400 text-rose-700 dark:text-metal-100">
         <option value="added-desc">Newest first</option>
         <option value="added-asc">Oldest first</option>
         <option value="date-asc">Due date (earliest)</option>
@@ -77,14 +102,14 @@
       </select>
     </div>
 
-    <!-- Add Category Modal (Hidden) -->
-    <div id="categoryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 items-center justify-center z-50">
-      <div class="bg-rose-100 rounded-lg p-6 max-w-sm w-full animate__animated animate__fadeIn">
-        <h3 class="text-lg font-medium mb-4 text-rose-700">Add New Category</h3>
-        <input id="newCategoryInput" type="text" placeholder="Category name" class="w-full border-b border-rose-200 px-2 py-2 focus:outline-none focus:border-rose-400 mb-4 bg-transparent">
+    <!-- Add Category Modal -->
+    <div id="categoryModal" class="hidden fixed inset-0 bg-black bg-opacity-50 dark:bg-opacity-80 items-center justify-center z-50">
+      <div class="bg-rose-100 dark:bg-dark-400 rounded-lg p-6 max-w-sm w-full animate__animated animate__fadeIn">
+        <h3 class="text-lg font-medium mb-4 text-rose-700 dark:text-metal-100">Add New Category</h3>
+        <input id="newCategoryInput" type="text" placeholder="Category name" class="w-full border-b border-rose-200 dark:border-metal-300 px-2 py-2 focus:outline-none focus:border-rose-400 dark:focus:border-metal-100 mb-4 bg-transparent dark:placeholder-metal-300 dark:text-metal-100">
         <div class="flex justify-end space-x-2">
-          <button id="cancelCategoryBtn" class="px-4 py-2 text-rose-500 hover:text-rose-700">Cancel</button>
-          <button id="saveCategoryBtn" class="px-4 py-2 bg-rose-700 text-white rounded hover:bg-rose-600">Save</button>
+          <button id="cancelCategoryBtn" class="px-4 py-2 text-rose-500 dark:text-metal-300 hover:text-rose-700 dark:hover:text-metal-100">Cancel</button>
+          <button id="saveCategoryBtn" class="px-4 py-2 bg-rose-700 dark:bg-metal-100 dark:text-dark-400 text-white rounded hover:bg-rose-600 dark:hover:bg-metal-200">Save</button>
         </div>
       </div>
     </div>
